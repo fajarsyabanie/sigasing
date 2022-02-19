@@ -31,13 +31,6 @@ if (isset($_POST['button_create'])) {
 }
 
 ?>
-
-
-
-
-
-
-
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb2">
