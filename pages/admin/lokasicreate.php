@@ -39,8 +39,8 @@ if (isset($_POST['button_create'])) {
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="?page=home"></a>Home</li>
-                    <li class="breadcrumb-item"><a href="?page=lokasiread"></a>Lokasi</li>
+                    <li class="breadcrumb-item"><a href="?page=home">Home</a></li>
+                    <li class="breadcrumb-item"><a href="?page=lokasiread">Lokasi</a></li>
                     <li class="breadcrumb-item active">Tambah Data</li>
                 </ol>
             </div>
