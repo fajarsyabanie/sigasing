@@ -54,14 +54,22 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Lokasi</th>
-                        <th>Opsi</th>
+                        <th>Tahun</th>
+                        <th>Gaji Pokok</th>
+                        <th>Tunjangan</th>
+                        <th>Uang Makan</th>
+                        <th>Total</th>
+                        <th>Opsi</th> 
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
                         <th>No</th>
-                        <th>Nama Lokasi</th>
+                        <th>Tahun</th>
+                        <th>Gaji Pokok</th>
+                        <th>Tunjangan</th>
+                        <th>Uang Makan</th>
+                        <th>Total</th> 
                         <th>Opsi</th>
                     </tr>
                 </tfoot>
@@ -69,7 +77,13 @@
                     <?php
                     $database = new Database();
                     $db = $database->getConnection();
-                    $selectSql = "SELECT * FROM lokasi";
+                    $selectSql = "SELECT tahun,
+                    SUM(P.gapok) jumlah_gapok,
+                    SUM(P.tunjangan) jumlah_tunjangan,
+                    SUM(P.uang_makan) jumlah_uang_makan,
+                    SUM(P.gapok) + SUM(P.tunjangan) + SUM(P.uang_makan) total
+                    FROM penggajian P
+                    GROUP BY tahun;";
                     $stmt = $db->prepare($selectSql);
                     $stmt->execute();
                     $no = 1;
@@ -77,13 +91,14 @@
                     ?>
                         <tr>
                             <td><?php echo $no++ ?></td>
-                            <td><?php echo $row['nama_lokasi'] ?></td>
+                            <td><?php echo $row['tahun'] ?></td>
+                            <td style="text-align:right"><?php echo number_format($row['jumlah_gapok']) ?></td>
+                            <td style="text-align:right"><?php echo number_format($row['jumlah_tunjangan']) ?></td>
+                            <td style="text-align:right"><?php echo number_format($row['jumlah_uang_makan']) ?></td>
+                            <td style="text-align:right"><?php echo number_format($row['total']) ?></td>
                             <td>
-                                <a href="?page=lokasiupdate&id=<?php echo $row['id'] ?>" class="btn btn-primary btn-sm mr-1">
-                                    <i class="fa fa-edit"></i> Ubah
-                                </a>
-                                <a href="?page=lokasidelete&id=<?php echo $row['id'] ?>" class="btn btn-danger btn-sm" onClick="javascript: return confirm('Konfirmasi data akan dihapus?');">
-                                    <i class="fa fa-trash"></i> Hapus
+                                <a href="?page=penggajianrekaptahun&tahun=<?php echo $row['tahun'] ?>" 
+                                class="btn btn-info btn-sm mr-1"><i class="fa fa-info"></i> Rincian
                                 </a>
                             </td>
                         </tr>
