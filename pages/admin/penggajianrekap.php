@@ -26,7 +26,7 @@
 ?>
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Lokasi</h1>
+                <h1 class="m-0">Rekapitulasi Penggajian</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -45,9 +45,9 @@
 <div class="content">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Data Lokasi</h3>
+            <h3 class="card-title">Data Rekap Gaji</h3>
             <a href="?page=lokasicreate" class="btn btn-success btn-sm float-right">
-                <i class="fa fa-plus-circle"></i> Tambah Data</a>
+            <i class="fa fa-file-pdf"></i> Export PDF</a> 
         </div>
         <div class="card-body">
             <table id="mytable" class="table table-bordered table-hover">
@@ -111,11 +111,15 @@
     </div>
 </div>
 
-<?php include "partials/scripts.php" ?>
 <?php include_once "partials/scripts.php" ?>
 <?php include_once "partials/scriptsdatatables.php" ?>
 <script>
-    $(function() {
-        $('#mytable').DataTable()
+     $(function() {
+        $("#mytable").DataTable({
+            "responsive" : true,
+            "lengthChange" : false,
+            "autoWidth" : false,
+            "buttons" : ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#mytable_wrapper .col-md-6:eq(0)');
     });
 </script>
